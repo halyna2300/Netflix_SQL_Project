@@ -5,7 +5,7 @@
 ## Overview  
 This project explores **Netflix's vast library of movies and TV shows** using **SQL for data analysis**. By examining content trends, country distributions, and key performance indicators, this analysis provides insights into **Netflix’s content strategy, user preferences, and overall catalog growth**. The project focuses on extracting meaningful data to identify **patterns in genre popularity, top-producing countries, release trends, and key contributors** such as actors and directors.  
 
-## **Objectives
+## Objectives
 - **Compare the distribution of Movies vs. TV Shows** on Netflix.  
 - **Identify the most popular content ratings** and their frequency.  
 - **Analyze content availability across different countries.**  
