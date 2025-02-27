@@ -83,9 +83,10 @@ AND CAST(SUBSTRING_INDEX(duration, ' ', 1) AS UNSIGNED) = (
 );
 ```
 ### 6. How many movies and TV shows were added in the last 5 years?
+```sql
 SELECT * FROM netflix_titles23
 WHERE STR_TO_DATE(date_added, '%d-%b-%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR);
-
+```
 ### 7. What content was directed by Rajiv Chilaka?
 ```sql
 SELECT * FROM netflix_titles23
