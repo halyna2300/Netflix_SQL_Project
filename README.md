@@ -40,39 +40,40 @@ CREATE TABLE netflix_titles23 (
     listed_in VARCHAR(255),
     description TEXT
 );
+```
+## Business Questions & SQL Queries
 
-##Business Questions & SQL Queries
-
-### **How many Movies vs. TV Shows are available on Netflix?**
+### 1. How many Movies vs. TV Shows are available on Netflix?
 
 ```sql
 SELECT show_type, COUNT(*) as total_content
 FROM netflix_titles23
 GROUP BY show_type;
-
-## **Which content ratings are most common?**
+```
+### 2. Which content ratings are most common?
 ```sql
 SELECT show_type, rating, COUNT(*) AS total_count
 FROM netflix_titles23
 GROUP BY show_type, rating
 ORDER BY total_count DESC
 LIMIT 10;
-
-## **Which movies were released in a specific year (e.g., 2020)?**
+```
+### 3. Which movies were released in a specific year (e.g., 2020)?
 ```sql
 SELECT * FROM netflix_titles23
 WHERE show_type = 'Movie' AND release_year = 2020;
-
-## **Which 5 countries contribute the most content to Netflix?**
-
+```
+### 4. Which 5 countries contribute the most content to Netflix?
+```sql
 SELECT country, COUNT(*) AS total_content
 FROM netflix_titles23
 WHERE country IS NOT NULL AND country <> ''
 GROUP BY country
 ORDER BY total_content DESC
 LIMIT 5;
-
-## **Which movie has the longest runtime on Netflix?**
+```
+### 5. Which movie has the longest runtime on Netflix?
+```sql
 SELECT * FROM netflix_titles23
 WHERE show_type = 'Movie' 
 AND CAST(SUBSTRING_INDEX(duration, ' ', 1) AS UNSIGNED) = (
@@ -80,23 +81,24 @@ AND CAST(SUBSTRING_INDEX(duration, ' ', 1) AS UNSIGNED) = (
     FROM netflix_titles23
     WHERE show_type = 'Movie'
 );
-
-## **How many movies and TV shows were added in the last 5 years?**
+```
+### 6. How many movies and TV shows were added in the last 5 years?
 SELECT * FROM netflix_titles23
 WHERE STR_TO_DATE(date_added, '%d-%b-%y') >= DATE_SUB(CURDATE(), INTERVAL 5 YEAR);
 
-## **What content was directed by Rajiv Chilaka?**
+### 7. What content was directed by Rajiv Chilaka?
+```sql
 SELECT * FROM netflix_titles23
 WHERE director LIKE '%Rajiv Chilaka%';
-
-## **Which TV Shows have more than 5 seasons?**
+```
+### 8. Which TV Shows have more than 5 seasons?
 ```sql
 SELECT * FROM netflix_titles23
 WHERE show_type = 'TV Show'
 AND duration LIKE '%Season%'
 AND CAST(SUBSTRING_INDEX(duration, ' ', 1) AS UNSIGNED) > 5;
-
-## **What are the most popular genres on Netflix?**
+```
+### 9. What are the most popular genres on Netflix?
 ```sql
 SELECT genre, COUNT(*) AS total_content
 FROM (
@@ -109,8 +111,8 @@ FROM (
 WHERE genre IS NOT NULL AND genre <> ''
 GROUP BY genre
 ORDER BY total_content DESC;
-
-## **Which years had the highest content releases in Japan?**
+```
+### 10. Which years had the highest content releases in Japan?
 ```sql
 SELECT year, 
     ROUND(COUNT(*) / (SELECT COUNT(*) FROM netflix_titles23 WHERE country = 'Japan') * 100, 2) AS avg_content_per_year
@@ -119,22 +121,23 @@ WHERE country = 'Japan'
 GROUP BY year
 ORDER BY year DESC
 LIMIT 5;
-
-## **How many documentary movies are available on Netflix?**
+```
+### 11. How many documentary movies are available on Netflix?
 ```sql
 SELECT * FROM netflix_titles23
 WHERE listed_in LIKE '%Documentaries%';
-Which movies and TV shows have no director assigned?
+```
+### 12. Which movies and TV shows have no director assigned?
 SELECT * FROM netflix_titles23
 WHERE director IS NULL OR director = '';
-
-## **How many movies has Salman Khan appeared in the last 10 years?**
+``
+### 13. How many movies has Salman Khan appeared in the last 10 years?
 ```sql
 SELECT * FROM netflix_titles23
 WHERE casts LIKE '%Salman Khan%' 
 AND release_year >= EXTRACT(YEAR FROM CURRENT_DATE) - 10;
-
-## **Who are the top 10 actors in Indian Netflix content?**
+```
+### 14. Who are the top 10 actors in Indian Netflix content?
 ```sql
 WITH RECURSIVE actor_split AS (
     SELECT show_id, country, 
@@ -155,8 +158,8 @@ WHERE actor IS NOT NULL AND actor <> ''
 GROUP BY actor 
 ORDER BY total_content DESC 
 LIMIT 10;
-
-## **How many Movies & TV Shows are added each year and month?**
+```
+### 15. How many Movies & TV Shows are added each year and month?
 ```sql
 SELECT EXTRACT(YEAR FROM STR_TO_DATE(date_added, '%d-%b-%y')) AS year,
        EXTRACT(MONTH FROM STR_TO_DATE(date_added, '%d-%b-%y')) AS month,
