@@ -41,9 +41,9 @@ CREATE TABLE netflix_titles23 (
     description TEXT
 );
 
-## **Business Questions & SQL Queries**
+##Business Questions & SQL Queries
 
-How many Movies vs. TV Shows are available on Netflix?
+### **How many Movies vs. TV Shows are available on Netflix?**
 
 ```sql
 SELECT show_type, COUNT(*) as total_content
