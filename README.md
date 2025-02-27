@@ -129,6 +129,7 @@ SELECT * FROM netflix_titles23
 WHERE listed_in LIKE '%Documentaries%';
 ```
 ### 12. Which movies and TV shows have no director assigned?
+```sql
 SELECT * FROM netflix_titles23
 WHERE director IS NULL OR director = '';
 ``
