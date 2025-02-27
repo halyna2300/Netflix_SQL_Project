@@ -132,7 +132,7 @@ WHERE listed_in LIKE '%Documentaries%';
 ```sql
 SELECT * FROM netflix_titles23
 WHERE director IS NULL OR director = '';
-``
+```
 ### 13. How many movies has Salman Khan appeared in the last 10 years?
 ```sql
 SELECT * FROM netflix_titles23
